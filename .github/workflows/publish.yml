@@ -1,0 +1,90 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (e.g. v1.2.3)'
+        required: true
+      registry:
+        description: 'Registry to publish to'
+        required: false
+        type: choice
+        default: both
+        options:
+          - both
+          - npm
+          - jsr
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      REGISTRY: ${{ inputs.registry || 'both' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Verify tag matches package.json and jsr.json version
+        run: |
+          TAG_VERSION="${TAG#v}"
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          JSR_VERSION="$(node -p "require('./jsr.json').version")"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "::error::Tag $TAG does not match package.json version $PKG_VERSION. Bump the version (e.g. \`npm version $TAG_VERSION\`) before tagging."
+            exit 1
+          fi
+          if [ "$TAG_VERSION" != "$JSR_VERSION" ]; then
+            echo "::error::Tag $TAG does not match jsr.json version $JSR_VERSION. Bump jsr.json's version to match before tagging."
+            exit 1
+          fi
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - name: Test
+        run: bun run test:coverage
+
+      - name: Build
+        run: bun run build
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+
+      - name: Publish to npm
+        id: publish_npm
+        if: env.REGISTRY == 'both' || env.REGISTRY == 'npm'
+        continue-on-error: true
+        run: npm publish --provenance --access public
+
+      - name: Publish to JSR
+        if: env.REGISTRY == 'both' || env.REGISTRY == 'jsr'
+        run: npx jsr publish
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, skipping."
+          else
+            gh release create "$TAG" --generate-notes
+          fi
+
+      - name: Fail if npm publish failed
+        if: steps.publish_npm.outcome == 'failure'
+        run: |
+          echo "::error::Publish to npm failed. JSR publish and the GitHub release still ran, but npm needs attention."
+          exit 1

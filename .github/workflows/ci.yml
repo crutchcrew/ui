@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install
+
+      - name: Lockfile drift
+        run: bun run lockfile:check
+
+      - name: Format
+        run: bun run fmt:check
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Test
+        run: bun run test:coverage
+
+      - name: Build
+        run: bun run build
+
+      - name: Build Ladle gallery
+        run: bun run story:build
+
+      - name: Generate badges
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p build/badges
+
+          # Coverage % from vitest's json-summary reporter
+          COVERAGE=$(node -p "require('./coverage/coverage-summary.json').total.lines.pct")
+          if [ "$(echo "$COVERAGE >= 90" | bc)" -eq 1 ]; then COLOR="brightgreen"
+          elif [ "$(echo "$COVERAGE >= 70" | bc)" -eq 1 ]; then COLOR="yellow"
+          else COLOR="red"; fi
+          echo "{\"schemaVersion\":1,\"label\":\"coverage\",\"message\":\"${COVERAGE}%\",\"color\":\"${COLOR}\"}" > build/badges/coverage.json
+
+          # Combined gzip size of every published dist bundle
+          GZIP_BYTES=$(find dist -name '*.js' -exec cat {} + | gzip -c | wc -c | tr -d ' ')
+          if [ "$GZIP_BYTES" -lt 1024 ]; then
+            SIZE_LABEL="${GZIP_BYTES} B"
+          else
+            SIZE_LABEL="$(echo "scale=1; $GZIP_BYTES / 1024" | bc) kB"
+          fi
+          echo "{\"schemaVersion\":1,\"label\":\"gzip size\",\"message\":\"${SIZE_LABEL}\",\"color\":\"blue\"}" > build/badges/size.json
+
+      - name: Deploy gallery + badges
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
+          keep_files: false
