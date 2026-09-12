@@ -1,0 +1,53 @@
+{
+  "about": {
+    "homepage": "https://www.ladle.dev",
+    "github": "https://github.com/tajo/ladle",
+    "version": 1
+  },
+  "stories": {
+    "button-group--default": {
+      "name": "Default",
+      "levels": [
+        "Button group"
+      ],
+      "locStart": 6,
+      "locEnd": 21,
+      "filePath": "src/components/button-group/button-group.stories.tsx",
+      "namedExport": "Default",
+      "meta": {}
+    },
+    "button--default": {
+      "name": "Default",
+      "levels": [
+        "Button"
+      ],
+      "locStart": 12,
+      "locEnd": 33,
+      "filePath": "src/components/button/button.stories.tsx",
+      "namedExport": "Default",
+      "meta": {}
+    },
+    "button--icon-only": {
+      "name": "Icon only",
+      "levels": [
+        "Button"
+      ],
+      "locStart": 45,
+      "locEnd": 68,
+      "filePath": "src/components/button/button.stories.tsx",
+      "namedExport": "IconOnly",
+      "meta": {}
+    },
+    "button--with-icon": {
+      "name": "With icon",
+      "levels": [
+        "Button"
+      ],
+      "locStart": 80,
+      "locEnd": 103,
+      "filePath": "src/components/button/button.stories.tsx",
+      "namedExport": "WithIcon",
+      "meta": {}
+    }
+  }
+}

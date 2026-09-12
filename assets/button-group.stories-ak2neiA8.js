@@ -1,0 +1,11 @@
+import{j as t,r}from"./index-lIQu83Nr.js";import{c as s,i as c,a as p,B as o}from"./button-ud7crqox.js";/**
+ * @license lucide-react v1.39.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const h=[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]],f=s("arrow-left",h);/**
+ * @license lucide-react v1.39.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const x=[["path",{d:"M5 12h14",key:"1ays0h"}],["path",{d:"m12 5 7 7-7 7",key:"xquz4c"}]],m=s("arrow-right",x);function g({variant:a="outline",orientation:n,children:d,size:i,...u}){return t.jsx("div",{role:"group","data-slot":"button-group","data-orientation":n,className:w({orientation:n}),...u,children:r.Children.map(d,e=>c(e,o)?r.cloneElement(e,{size:i,variant:a==="default"&&e.props.variant==="destructive"?e.props.variant:a}):null)})}const w=p("flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-lg [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",{variants:{orientation:{horizontal:"*:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-lg! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0",vertical:"flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-lg! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0"}},defaultVariants:{orientation:"horizontal"}});function l(a){return t.jsxs(g,{...a,children:[t.jsx(o,{children:t.jsx(f,{})}),t.jsx(o,{children:"Default"}),t.jsx(o,{children:"Default"}),t.jsx(o,{children:"Outline"}),t.jsx(o,{children:"Ghost"}),t.jsx(o,{children:t.jsx(m,{})})]})}l.args={size:"default",variant:"outline",orientation:"horizontal"};l.argTypes={size:{control:{type:"radio"},options:["default","sm"]},variant:{control:{type:"radio"},options:["default","outline"]},orientation:{control:{type:"radio"},options:["horizontal","vertical"]}};typeof window<"u"&&window.document&&window.document.createElement&&document.documentElement.setAttribute("data-storyloaded","");export{l as Default};
