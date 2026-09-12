@@ -1,0 +1,13 @@
+{
+	"name": "@crutchcrew/ui",
+	"version": "0.0.1",
+	"exports": {
+		"./components": "./src/components/index.ts",
+		"./blocks": "./src/blocks/index.ts",
+		"./provider": "./src/provider.tsx"
+	},
+	"publish": {
+		"include": ["LICENSE", "README.md", "src/**/*.{ts,tsx}"],
+		"exclude": ["src/**/*.spec.tsx", "src/**/*.stories.tsx"]
+	}
+}

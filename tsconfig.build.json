@@ -1,0 +1,11 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"extends": "./tsconfig.json",
+	"exclude": ["src/**/*.spec.tsx", "src/**/*.stories.tsx", ".ladle", "tests"],
+	"compilerOptions": {
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"outDir": "dist",
+		"rootDir": "src"
+	}
+}
