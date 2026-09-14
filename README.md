@@ -37,6 +37,7 @@ npm add @crutchcrew/ui
 Import the stylesheet once (e.g. in your app's root CSS entry) and wrap your app in the provider:
 
 ```css
+@import '@tailwindcss';
 @import '@crutchcrew/ui/theme.css';
 ```
 
