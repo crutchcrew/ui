@@ -1,5 +1,7 @@
 @source ".";
 
 @theme {
-	--font-sans: 'Inter', sans;
+	--font-sans:
+		'SF Pro', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
