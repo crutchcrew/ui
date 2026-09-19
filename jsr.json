@@ -1,5 +1,5 @@
 {
-	"name": "@crutchcrew/ui",
+	"name": "@crutchcrew/uikit",
 	"version": "0.0.1",
 	"exports": {
 		"./components": "./src/components/index.ts",

@@ -1,5 +1,5 @@
 {
-	"name": "@crutchcrew/ui",
+	"name": "@crutchcrew/uikit",
 	"version": "0.0.1",
 	"description": "React component library and design system, built on Base UI and Tailwind CSS",
 	"keywords": [
@@ -9,15 +9,15 @@
 		"tailwindcss",
 		"ui"
 	],
-	"homepage": "https://github.com/crutchcrew/ui#readme",
+	"homepage": "https://github.com/crutchcrew/uikit#readme",
 	"bugs": {
-		"url": "https://github.com/crutchcrew/ui/issues"
+		"url": "https://github.com/crutchcrew/uikit/issues"
 	},
 	"license": "MIT",
 	"author": "Crutch Crew",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/crutchcrew/ui.git"
+		"url": "git+https://github.com/crutchcrew/uikit.git"
 	},
 	"files": [
 		"dist"
@@ -27,7 +27,7 @@
 		"*.css"
 	],
 	"exports": {
-		"./theme.css": "./dist/theme.css",
+		"./theme.css": "./src/theme.css",
 		"./components": {
 			"types": "./dist/components/index.d.ts",
 			"import": "./dist/components/index.js"
@@ -42,9 +42,8 @@
 		}
 	},
 	"scripts": {
-		"build": "bun run --parallel build:compile build:declaration build:css",
+		"build": "bun run --parallel build:compile build:declaration",
 		"build:compile": "bun build src/components/index.ts src/blocks/index.ts src/provider.tsx --outdir dist --format esm",
-		"build:css": "mkdir -p dist && cp src/theme.css dist/theme.css",
 		"build:declaration": "tsc -p tsconfig.build.json --noEmit false",
 		"check": "bun run --parallel fmt:check lint lockfile:check",
 		"dev": "ladle serve",
