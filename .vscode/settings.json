@@ -9,6 +9,5 @@
 	"tailwindCSS.includeLanguages": {
 		"html": "html",
 		"typescriptreact": "typescriptreact"
-	},
-	"cSpell.words": ["Segoe", "Noto"]
+	}
 }
