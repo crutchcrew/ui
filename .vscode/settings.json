@@ -1,0 +1,14 @@
+{
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"tailwindCSS.classFunctions": ["cx", "cvx"],
+	"tailwindCSS.includeLanguages": {
+		"html": "html",
+		"typescriptreact": "typescriptreact"
+	},
+	"cSpell.words": ["Segoe", "Noto"]
+}

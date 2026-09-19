@@ -1,6 +1,6 @@
 import { Children, cloneElement, useId, useLayoutEffect } from 'react'
 
-import { createVariants, type VariantProps } from '../../utils/class-names'
+import { cvx, type VariantProps } from '../../utils/class-names'
 import { isComponent } from '../../utils/react-utils'
 import { type ComponentProps } from '../../utils/types'
 
@@ -83,7 +83,7 @@ export function ButtonGroup({
 	)
 }
 
-const buttonGroup = createVariants(
+const buttonGroup = cvx(
 	"flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-lg [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
 	{
 		variants: {

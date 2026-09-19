@@ -1,6 +1,6 @@
 import { useEffect, useId } from 'react'
 
-import { createVariants, type VariantProps } from '../../utils/class-names'
+import { cvx, type VariantProps } from '../../utils/class-names'
 import { isIconOnly } from '../../utils/react-utils'
 import { type ComponentProps } from '../../utils/types'
 
@@ -35,7 +35,7 @@ export function Button<TElementType extends React.ElementType = 'button'>({
 	)
 }
 
-const button = createVariants(
+const button = cvx(
 	[
 		'inline-flex shrink-0 items-center justify-center border font-medium whitespace-nowrap outline-none',
 		'transition-all duration-100',

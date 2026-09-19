@@ -18,7 +18,7 @@ export { type VariantProps } from 'class-variance-authority'
  * Defines styling variants base on class name composition It runs `tailwind-merge` under the hood
  * in order to deduplicate tailwind classed that set the same properties
  */
-export function createVariants<TParams>(
+export function cvx<TParams>(
 	...args: Parameters<typeof cva<TParams>>
 ): (params?: Parameters<ReturnType<typeof cva<TParams>>>[0]) => string {
 	const variants = cva<TParams>(...args)
